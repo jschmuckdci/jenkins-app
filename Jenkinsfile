@@ -12,7 +12,7 @@ pipeline {
         stage("Build") {
             steps {
                 echo "Building the Docker image"
-                sh "sudo docker build -t jenkins-app-container ."
+                sh "docker build -t jenkins-app-container ."
             }
         }
 
@@ -20,9 +20,9 @@ pipeline {
             steps {
                 echo "Pushing image to Docker Hub"
                 withCredentials([usernamePassword(credentialsId: "dockerHub", passwordVariable: "dockerHubPass", usernameVariable: "dockerHubUser")]) {
-                    sh "sudo docker tag jenkins-app-container ${env.dockerHubUser}/jenkins-app-container:latest"
+                    sh "docker tag jenkins-app-container ${env.dockerHubUser}/jenkins-app-container:latest"
                     sh "echo ${env.dockerHubPass} | docker login -u ${env.dockerHubUser} --password-stdin"
-                    sh "sudo docker push ${env.dockerHubUser}/jenkins-app-container:latest"
+                    sh "docker push ${env.dockerHubUser}/jenkins-app-container:latest"
                 }
             }
         }
@@ -30,7 +30,7 @@ pipeline {
         stage ("Deploy") {
             steps {
                 echo "Deploying the container"
-                sh "sudo docker compose down && docker compose up -d"
+                sh "docker compose down && docker compose up -d"
             }
         }
     }
