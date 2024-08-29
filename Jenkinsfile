@@ -5,7 +5,7 @@ pipeline {
         stage("Clone Code") {
             steps {
                 echo "Cloning the code"
-                git url: "<your GitHub URL>", branch: "main"
+                git url: "https://github.com/jschmuckdci/jenkins-app.git", branch: "main"
             }
         }
 
