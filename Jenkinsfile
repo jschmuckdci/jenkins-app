@@ -12,7 +12,7 @@ pipeline {
         stage("Build") {
             steps {
                 echo "Building the Docker image"
-                sh "sudo docker build -t test-app ."
+                sh "sudo docker build -t jenkins-app-container ."
             }
         }
 
