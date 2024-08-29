@@ -20,9 +20,9 @@ pipeline {
             steps {
                 echo "Pushing image to Docker Hub"
                 withCredentials([usernamePassword(credentialsId: "dockerHub", passwordVariable: "dockerHubPass", usernameVariable: "dockerHubUser")]) {
-                    sh "sudo docker tag test-app ${env.dockerHubUser}/test-app:latest"
+                    sh "sudo docker tag jenkins-app-container ${env.dockerHubUser}/jenkins-app-container:latest"
                     sh "sudo docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                    sh "sudo docker push ${env.dockerHubUser}/test-app:latest"
+                    sh "sudo docker push ${env.dockerHubUser}/jenkins-app-container:latest"
                 }
             }
         }
